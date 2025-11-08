@@ -1,4 +1,5 @@
 import React from 'react';
+import { app } from '../../public/firebase';
 
 const Context = () => {
     return (

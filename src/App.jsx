@@ -5,6 +5,11 @@ import Home from './Components/Home'
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 import Context from './Components/Context'
+import Login from './Components/Login'
+import Register from './Components/Register'
+import Bills from './Components/Bills'
+import MyBills from './Components/MyBills'
+import BillDetails from './Components/BillDetails'
 
 const router = createBrowserRouter([
     {
@@ -16,9 +21,12 @@ const router = createBrowserRouter([
         ),
         children: [
             { index: true, element: <Navigate to="/home" replace /> },
-            { path: "home", element: <Home></Home> }
-
-
+            { path: "home", element: <Home></Home> },
+            { path: "login", element: <Login></Login> },
+            { path: "register", element: <Register></Register> },
+            { path: "bills", element: <Bills></Bills> },
+            { path: "bills/:id", element: <BillDetails></BillDetails> },
+            { path: "mybills", element: <MyBills></MyBills> },
         ]
     }
 ])
