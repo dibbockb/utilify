@@ -1,6 +1,12 @@
 import React from 'react';
+import { MdOutlineElectricBolt } from "react-icons/md";
+import { FaGasPump } from "react-icons/fa";
+import { FaHandHoldingWater } from "react-icons/fa";
+import { BsEthernet } from "react-icons/bs";
 
 const Home = () => {
+
+
     return (
         //         <div className="max-w-7xl mx-auto mt-8 px-4 pt-5 flex flex-col ">
         //             <div className="hero-carousel">
@@ -45,8 +51,36 @@ const Home = () => {
         //         }, 250);
         //       `}} />
         //         </div>
+        <>
+            {/* category cards */}
+            <div className="category-cards pb-5 pt-10 gap-6 flex justify-center items-center ">
 
-        <></>
+                <div className="category-card flex flex-col items-center text-center justify-center ">
+                    <MdOutlineElectricBolt className="category-ico w-20 h-20"></MdOutlineElectricBolt>
+                    <h4 className="text-4xl text-center pt-5">Electricity</h4>
+                    <p className=" text-2xl w-55 pt-3 text-center">Pay your power bill in 30 seconds. No lines. No hassle.</p>
+                </div>
+
+                <div className="category-card flex flex-col items-center text-center justify-center ">
+                    <FaGasPump className="category-ico w-20 h-20"></FaGasPump>
+                    <h4 className="text-4xl text-center pt-5">Gas</h4>
+                    <p className=" text-2xl w-50 pt-3 text-center">Settle gas bills instantly. Cook without worry.</p>
+                </div>
+
+                <div className="category-card flex flex-col items-center text-center justify-center ">
+                    <FaHandHoldingWater className="category-ico w-20 h-20"></FaHandHoldingWater>
+                    <h4 className="text-4xl text-center pt-5">Water</h4>
+                    <p className=" text-2xl w-50 pt-3 text-center">Pay WASA bills fast. Keep the flow running.</p>
+                </div>
+
+                <div className="category-card flex flex-col items-center text-center justify-center ">
+                    <BsEthernet className="category-ico w-20 h-20"></BsEthernet>
+                    <h4 className="text-4xl text-center pt-5">Internet</h4>
+                    <p className=" text-2xl w-50 pt-3 text-center">Recharge broadband in one tap. Stay online.</p>
+                </div>
+            </div>
+
+        </>
     );
 };
 

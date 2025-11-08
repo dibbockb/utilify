@@ -63,3 +63,17 @@ a.active{
 .hero-text {
   @apply text-lg md:text-2xl max-w-2xl;
 }
+
+.category-card{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: 300px;
+  height: 400px;
+  border-radius: 24px;
+  background-color: #ffffff81;
+  transition: transform ease-in 0.1s;
+}
+
+.category-card:hover{
+  transform: scale(1.05);
+  background-color: aliceblue;
+}
