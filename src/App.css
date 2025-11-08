@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: "figtree", 'sans-serif';
+}
+
+* {
+  margin: 0;
+}
+
+
+.figtree {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+a{
+    text-decoration-thickness: 10%;
+    text-underline-offset: 8px;
+}
+
+a:hover{
+  text-decoration: underline;
+
+}
+
+a.active{
+  text-decoration : underline;
+
+
+}
