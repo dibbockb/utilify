@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { RiUser5Fill } from "react-icons/ri";
 
 const Navbar = () => {
@@ -8,10 +8,10 @@ const Navbar = () => {
             <div className="navbar-container navbar bg-base-100 shadow-sm h-10 ">
                 <div className="flex-1 flex justify-around items-center">
 
-                    <div className="gap-2 flex items-center">
+                    <Link to={'/'} className="gap-2 flex items-center">
                         <img className='w-[50px]' src="/logo.png" alt="" />
-                        <a className="text-2xl font-bold">Utilify</a>
-                    </div>
+                        <Link to={'/'} className="text-2xl font-bold">Utilify</Link>
+                    </Link>
 
                     <div className='nav-items-middle flex gap-5 '>
                         <NavLink to={'/home'} className={'font-medium text-[18px]'}>Home</NavLink>

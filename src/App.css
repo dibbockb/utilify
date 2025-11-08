@@ -25,6 +25,7 @@
 a{
     text-decoration-thickness: 10%;
     text-underline-offset: 8px;
+    cursor: default;
 }
 
 a:hover{
@@ -34,6 +35,31 @@ a:hover{
 
 a.active{
   text-decoration : underline;
+}
+
+.hero-carousel {
+  @apply carousel w-full rounded-3xl h-[500px] md:h-[700px] shadow-2xl overflow-hidden flex items-center justify-center; 
+}
 
 
+.hero-slide {
+  @apply carousel-item relative w-full h-full flex items-center justify-center;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero1 { background-image: url('/hero1.png'); }
+.hero2 { background-image: url('/hero2.png'); }
+.hero3 { background-image: url('/hero3.png'); }
+
+.hero-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-8 md:p-16 text-white;
+}
+
+.hero-title {
+  @apply text-4xl md:text-6xl font-bold mb-3;
+}
+
+.hero-text {
+  @apply text-lg md:text-2xl max-w-2xl;
 }
