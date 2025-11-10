@@ -5,10 +5,10 @@ import { RiUser5Fill } from "react-icons/ri";
 const Navbar = () => {
     return (
         <>
-            <div className="navbar-container navbar bg-base-100 shadow-sm h-10 w-full ">
-                <div className="flex-1 flex justify-around items-center">
+            <div className="navbar-container navbar bg-base-100 shadow-sm h-15 w-full">
+                <div className="flex-1 flex justify-around items-center h-15">
 
-                    <Link to={'/'} className="gap-2 flex items-center">
+                    <Link to={'/'} className="gap-2 flex items-center justify-center">
                         <img className='w-[50px]' src="/logo.png" alt="" />
                         <p className="text-2xl font-bold"> Utilify</p>
                     </Link>
