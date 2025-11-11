@@ -21,7 +21,6 @@ const Home = () => {
 
     const handleSeeDetails = (id) => {
         navigate(`/bills/${id}`);
-        // console.log(id);
 
     };
 

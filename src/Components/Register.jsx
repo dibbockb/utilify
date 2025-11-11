@@ -5,13 +5,17 @@ import { useNavigate } from 'react-router';
 import { useRef } from 'react';
 import { app, provider } from '../../public/firebase';
 import { getAuth } from 'firebase/auth';
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const { handleRegister, user, setUser, signInWithPopup } = useContext(AuthContext)
-    const navigate = useNavigate()
     const auth = getAuth(app);
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false);
+    const { handleRegister, user, setUser, signInWithPopup, MySwal } = useContext(AuthContext)
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+
     const emailRef = useRef(null);
     const usernameRef = useRef(null);
     const photoURLRef = useRef(null);
@@ -23,9 +27,13 @@ const Register = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 setUser(result.user)
-                console.log(`google sign in done`, result.user);
                 navigate('/home')
-
+                MySwal.fire({
+                    title: "Successfull",
+                    icon: "success",
+                    draggable: false,
+                    timer: 1000,
+                });
             }).catch((err) => {
                 const errorCode = err.code
                 const errorMessage = err.message
@@ -51,14 +59,25 @@ const Register = () => {
 
         handleRegister(email, password)
             .then(result => {
-                console.log(`Registration Complete`, result.user);
-                setUser(user);
-                navigate('/home')
+                setUser(result.user);
+                navigate('/home');
+                MySwal.fire({
+                    title: "Successfull!",
+                    icon: "success",
+                    draggable: false,
+                    timer: 1000,
+                });
             })
             .catch(error => {
                 setError(error.message)
                 console.log(`error`, error);
                 setLoading(false)
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    timer: 1500,
+                });
             })
     }
 
@@ -73,7 +92,15 @@ const Register = () => {
                             <form className="fieldset flex flex-col items-center">
                                 <br />
                                 <input ref={emailRef} name="email" type="email" className="input border rounded-2xl border-green-600" placeholder="Email *" required />
-                                <input ref={passwordRef} name="password" type="password" className="input border rounded-2xl border-green-600" placeholder="Password *" required />
+                                <div className="flex justify-center items-center relative w-full mt-4">
+                                    <input ref={passwordRef} name="password" type={showPassword ? 'text' : 'password'} className="input border rounded-2xl border-green-600" placeholder="Password *" required />
+                                    <button type="button"
+                                        onClick={() => setShowPassword(prev => !prev)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-900"
+                                        title={showPassword ? 'Hide password' : 'Show password'}>
+                                        {showPassword ? <FaRegEyeSlash></FaRegEyeSlash> : <FaRegEye></FaRegEye>}
+                                    </button>
+                                </div>
                                 <input ref={usernameRef} name="name" type="text" className="input border rounded-2xl border-green-600" placeholder="Name" />
                                 <input ref={photoURLRef} name="photoURL" type="password" className="input border rounded-2xl border-green-600" placeholder="Photo URL" />
                                 <br />

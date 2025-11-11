@@ -8,7 +8,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const auth = getAuth(app);
-    const { user, setUser, handleLogin } = useContext(AuthContext)
+    const { user, setUser, handleLogin, MySwal } = useContext(AuthContext)
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [showPassword, setShowPassword] = useState(false);
@@ -21,13 +21,24 @@ const Login = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 setUser(result.user)
-                console.log(`google sign in done`, result.user);
+                MySwal.fire({
+                    title: "Logged in successfully!",
+                    icon: "success",
+                    draggable: false,
+                    timer: 1000,
+                });
                 navigate('/home')
 
             }).catch((err) => {
                 const errorCode = err.code
                 const errorMessage = err.message
                 console.log(`error`, errorCode, errorMessage);
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    timer: 1500,
+                });
             });
     }
 
@@ -37,6 +48,7 @@ const Login = () => {
         const password = passwordRef.current.value;
         handleLogin(email, password);
         setUser(user);
+
     }
 
 

@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { NavLink } from 'react-router';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { app } from '../../public/firebase';
+import { AuthContext } from './Context';
 
 const ResetPassword = () => {
+    const { MySwal } = useContext(AuthContext);
 
     const emailRef = useRef(null);
     const auth = getAuth(app);
@@ -14,7 +16,12 @@ const ResetPassword = () => {
         console.log(`clicked forget reset button ++ ${email}`);
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                console.log(`sent mail to , ${email}`);
+                MySwal.fire({
+                    title: "Check your inbox!",
+                    icon: "success",
+                    draggable: false,
+                    timer: 1500,
+                });
             }).catch((err) => {
                 console.log(err);
             });
