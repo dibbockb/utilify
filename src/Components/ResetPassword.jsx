@@ -5,7 +5,20 @@ import { app } from '../../public/firebase';
 
 const ResetPassword = () => {
 
+    const emailRef = useRef(null);
+    const auth = getAuth(app);
 
+    const handleForgetReset = (event) => {
+        event.preventDefault();
+        const email = emailRef.current.value;
+        console.log(`clicked forget reset button ++ ${email}`);
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                console.log(`sent mail to , ${email}`);
+            }).catch((err) => {
+                console.log(err);
+            });
+    }
 
     return (
         <div>
