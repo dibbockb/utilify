@@ -1,16 +1,42 @@
-import React from 'react';
-import { NavLink } from 'react-router';
+import React, { useContext, useRef, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router';
+import { AuthContext } from './Context';
+import { app, provider } from '../../public/firebase';
+import { getAuth, signInWithPopup } from 'firebase/auth';
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+    const auth = getAuth(app);
+    const { user, setUser, handleLogin } = useContext(AuthContext)
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate()
+
+
 
     const handleGoogleButton = (event) => {
         event.preventDefault();
-        console.log(`clicked google button`);
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                setUser(result.user)
+                console.log(`google sign in done`, result.user);
+                navigate('/home')
+
+            }).catch((err) => {
+                const errorCode = err.code
+                const errorMessage = err.message
+                console.log(`error`, errorCode, errorMessage);
+            });
     }
 
     const handleLoginButton = (event) => {
         event.preventDefault();
-        console.log(`clicked login button`);
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        handleLogin(email, password);
+        setUser(user);
     }
 
 
@@ -21,11 +47,22 @@ const Login = () => {
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body flex justify-center items-center w-full">
                             <h1 className="text-4xl font-bold">Login</h1>
+
                             <form className="fieldset flex flex-col items-center">
                                 <br />
-                                <input type="email" className="input border rounded-2xl border-green-600" placeholder="Email" requrired />
-                                <input type="password" className="input border rounded-2xl border-green-600" placeholder="Password" requrired />
-                                <br />
+                                <input ref={emailRef} type="email" className="input border rounded-2xl border-green-600" placeholder="Email *" requrired />
+
+                                <div className="flex justify-center items-center relative w-full mt-4">
+
+                                    <input ref={passwordRef} type={showPassword ? 'text' : 'password'} className="input border rounded-2xl border-green-600" placeholder="Password *" requrired />
+                                    <button type="button"
+                                        onClick={() => setShowPassword(prev => !prev)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-900"
+                                        title={showPassword ? 'Hide password' : 'Show password'}>
+                                        {showPassword ? <FaRegEyeSlash></FaRegEyeSlash> : <FaRegEye></FaRegEye>}
+                                    </button>
+                                </div>
+
                                 <br />
                                 <NavLink to={'/resetpassword'} className="link link-hover">Forgot password?</NavLink>
                                 <NavLink to={'/register'} className="link link-hover">Create an account</NavLink>
@@ -37,6 +74,7 @@ const Login = () => {
                                 </button>
                                 <button onClick={handleLoginButton} className="border text-green-600 w-full h-10 rounded-4xl font-medium hover:bg-green-500 hover:text-white">Login</button>
                             </form>
+
                         </div>
                     </div>
                 </div>

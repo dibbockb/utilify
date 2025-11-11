@@ -3,25 +3,34 @@ import { NavLink } from 'react-router';
 import { AuthContext } from './Context';
 import { useNavigate } from 'react-router';
 import { useRef } from 'react';
-import { provider } from '../../public/firebase';
+import { app, provider } from '../../public/firebase';
+import { getAuth } from 'firebase/auth';
 
 const Register = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { handleRegister, user, signInWithPopup } = useContext(AuthContext)
+    const { handleRegister, user, setUser, signInWithPopup } = useContext(AuthContext)
     const navigate = useNavigate()
-
-
+    const auth = getAuth(app);
     const emailRef = useRef(null);
     const usernameRef = useRef(null);
     const photoURLRef = useRef(null);
     const passwordRef = useRef(null);
 
+
     const handleGoogleButton = (event) => {
         event.preventDefault();
-        console.log(`clicked google button`);
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                setUser(result.user)
+                console.log(`google sign in done`, result.user);
+                navigate('/home')
 
-        signInWithPopup(auth, provider);
+            }).catch((err) => {
+                const errorCode = err.code
+                const errorMessage = err.message
+                console.log(`error`, errorCode, errorMessage);
+            });
     }
 
     const handleRegisterButton = (event) => {
@@ -33,8 +42,6 @@ const Register = () => {
         const username = usernameRef.current.value;
         const photoURL = photoURLRef.current.value;
         const password = passwordRef.current.value;
-
-
         if (!email || !password) {
             setError(`Email, Name and Password are required!`)
             setLoading(false);
@@ -45,6 +52,7 @@ const Register = () => {
         handleRegister(email, password)
             .then(result => {
                 console.log(`Registration Complete`, result.user);
+                setUser(user);
                 navigate('/home')
             })
             .catch(error => {
@@ -70,7 +78,7 @@ const Register = () => {
                                 <input ref={photoURLRef} name="photoURL" type="password" className="input border rounded-2xl border-green-600" placeholder="Photo URL" />
                                 <br />
                                 <NavLink to={'/resetpassword'} className="link link-hover">Forgot password?</NavLink>
-                                <NavLink to={'/register'} className="link link-hover">Have an account? Login</NavLink>
+                                <NavLink to={'/login'} className="link link-hover">Have an account? Login</NavLink>
                                 <br />
                                 <button onClick={handleGoogleButton} className="border text-green-600 border-green-600 w-full h-10 rounded-4xl font-medium hover:bg-green-500 hover:text-white mb-3 flex items-center justify-center gap-2">
                                     <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>

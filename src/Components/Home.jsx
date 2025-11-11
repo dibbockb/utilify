@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdOutlineElectricBolt } from "react-icons/md";
 import { FaGasPump } from "react-icons/fa";
 import { FaHandHoldingWater } from "react-icons/fa";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 const Home = () => {
     const [allBids, setAllBids] = useState([]);
     const navigate = useNavigate();
+
 
     useEffect(() => {
         fetch(`http://localhost:3000/topbills`)

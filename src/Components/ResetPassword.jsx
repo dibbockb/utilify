@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { NavLink } from 'react-router';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { app } from '../../public/firebase';
 
 const ResetPassword = () => {
 
 
-    const handleForgetReset = (event) => {
-        event.preventDefault();
-        console.log(`clicked forget reset button`);
-
-    }
 
     return (
         <div>
@@ -19,15 +16,13 @@ const ResetPassword = () => {
                             <h1 className="text-4xl font-bold">Recovery</h1>
                             <form className="fieldset flex flex-col items-center">
                                 <br />
-                                <input type="email" className="input border rounded-2xl border-green-600" placeholder="Email" />
-                                <input type="password" className="input border rounded-2xl border-green-600" placeholder="Username" />
-                                <br />
+                                <input ref={emailRef} type="email" className="input border rounded-2xl border-green-600" placeholder="Email" />
                                 <br />
                                 <NavLink to={'/login'} className="link link-hover">Login</NavLink>
                                 <NavLink to={'/register'} className="link link-hover">Register</NavLink>
                                 <br />
 
-                                <button onClick={handleForgetReset} className="border text-green-600 w-full h-10 rounded-4xl font-medium hover:bg-green-500 hover:text-white">Reset Password</button>
+                                <button onClick={handleForgetReset} className="border text-green-600 w-full h-10 rounded-4xl font-medium hover:bg-green-500 hover:text-white">Send Mail</button>
                             </form>
                         </div>
                     </div>
