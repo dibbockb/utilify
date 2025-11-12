@@ -15,6 +15,7 @@ const Register = () => {
     const { handleRegister, user, setUser, signInWithPopup, MySwal } = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/
 
     const emailRef = useRef(null);
     const usernameRef = useRef(null);
@@ -54,6 +55,16 @@ const Register = () => {
             setError(`Email, Name and Password are required!`)
             setLoading(false);
             console.log(error);
+            return;
+        }
+
+        if (!passRegex.test(password)) {
+            setError(`Please choose a stronger password!`)
+            MySwal.fire({
+                icon: "error",
+                title: "Password must be at least 6 characters long and contain at least one uppercase and one lowercase letter.",
+                timer: 5000,
+            });
             return;
         }
 
