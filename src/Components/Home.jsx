@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineElectricBolt } from "react-icons/md";
 import { FaGasPump } from "react-icons/fa";
 import { FaHandHoldingWater } from "react-icons/fa";

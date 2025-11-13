@@ -1,56 +1,50 @@
 import React, { useContext, useRef, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from './Context';
 import { app, provider } from '../../public/firebase';
 import { getAuth, signInWithPopup } from 'firebase/auth';
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const auth = getAuth(app);
-    const { user, setUser, handleLogin, MySwal } = useContext(AuthContext)
+    const { user, setUser, handleLogin, MySwal } = useContext(AuthContext);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
+    const location = useLocation();
 
 
     const handleGoogleButton = (event) => {
         event.preventDefault();
         signInWithPopup(auth, provider)
             .then((result) => {
-                setUser(result.user)
-                MySwal.fire({
-                    title: "Logged in successfully!",
-                    icon: "success",
-                    draggable: false,
-                    timer: 1000,
-                });
-                navigate('/home')
-
-            }).catch((err) => {
-                const errorCode = err.code
-                const errorMessage = err.message
-                console.log(`error`, errorCode, errorMessage);
-                MySwal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong!",
-                    timer: 1500,
-                });
+                setUser(result.user);
+                MySwal.fire({ title: "Logged in!", icon: "success", timer: 1000 });
+                const from = location.state?.from?.pathname || '/home';
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
+                console.error(err);
+                MySwal.fire({ icon: "error", title: "Login failed", timer: 1500 });
             });
-    }
+    };
 
-    const handleLoginButton = (event) => {
+    const handleLoginButton = async (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        handleLogin(email, password);
-        setUser(user);
 
-    }
-
+        try {
+            const loggedInUser = await handleLogin(email, password);
+            setUser(loggedInUser);
+            MySwal.fire({ title: "Logged in!", icon: "success", timer: 1000 });
+            const from = location.state?.from?.pathname || '/home';
+            navigate(from, { replace: true });
+        } catch (err) {
+            MySwal.fire({ icon: "error", title: "Login failed", text: err.message, timer: 2000 });
+        }
+    };
 
     return (
         <div>
@@ -91,8 +85,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        </div>);
 };
 
 export default Login;

@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
                     draggable: false,
                     timer: 1000,
                 });
-                return result;
+                return result.user;
             })
             .catch(error => {
                 console.error("Error", error);

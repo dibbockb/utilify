@@ -25,7 +25,7 @@ const BillDetails = () => {
             });
     }, [id]);
 
-    if (loading) return <p className="text-center text-2xl mt-10">Loading bill...</p>;
+    if (loading) return <span className="loading loading-spinner text-neutral"></span>;
     if (error) return <p className="text-center text-red-500 text-2xl mt-10">{error}</p>;
     if (!bill) return <p className="text-center text-2xl mt-10">No bill found.</p>;
 

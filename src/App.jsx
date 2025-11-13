@@ -11,6 +11,7 @@ import Bills from './Components/Bills'
 import MyBills from './Components/MyBills'
 import BillDetails from './Components/BillDetails'
 import ResetPassword from './Components/ResetPassword'
+import PrivateRoute from './Components/PrivateRoute'
 
 const router = createBrowserRouter([
     {
@@ -26,7 +27,10 @@ const router = createBrowserRouter([
             { path: "login", element: <Login></Login> },
             { path: "register", element: <Register></Register> },
             { path: "bills", element: <Bills></Bills> },
-            { path: "bills/:id", element: <BillDetails></BillDetails> },
+            {
+                path: "bills/:id", element:
+                    <PrivateRoute><BillDetails></BillDetails></PrivateRoute>
+            },
             { path: "mybills", element: <MyBills></MyBills> },
             { path: "resetpassword", element: <ResetPassword></ResetPassword> },
         ]
