@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { Fade } from "react-awesome-reveal";
+
 
 const MyBills = () => {
     const { user, MySwal } = useContext(AuthContext);
@@ -127,51 +129,55 @@ const MyBills = () => {
     if (loading) return <div className="flex justify-center pt-20"><span className="loading loading-spinner loading-lg"></span></div>;
 
     return (
-        <div className="max-w-7xl mx-auto p-6">
-            <div className="flex justify-between items-center mb-6">
-                <h2 className="text-4xl font-bold">My Paid Bills</h2>
-                <div className="text-right">
-                    <p className="text-2xl">Total Bills Paid: <strong>{bills.length}</strong></p>
-                    <p className="text-2xl">Total Amount: <strong>৳{totalAmount.toLocaleString()} (${(totalAmount / 125).toFixed(2)} USD)</strong></p>
+        <Fade>
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="my-bills-container max-w-7xl w-full p-6">
+                    <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-4xl font-bold">My Paid Bills</h2>
+                        <div className="text-right">
+                            <p className="text-2xl">Total Bills Paid: <strong>{bills.length}</strong></p>
+                            <p className="text-2xl">Total Amount: <strong>৳{totalAmount.toLocaleString()} (${(totalAmount / 125).toFixed(2)} USD)</strong></p>
+                        </div>
+                    </div>
+
+                    <button onClick={handleDownloadPDF} className="btn btn-success mb-6">
+                        Download PDF Report
+                    </button>
+
+                    <div className="overflow-x-auto">
+                        <table className="table table-zebra w-full">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Amount</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bills.map(bill => (
+                                    <tr key={bill._id}>
+                                        <td>{bill.username}</td>
+                                        <td>{bill.email}</td>
+                                        <td>৳{bill.amount} (${(bill.amount / 125).toFixed(2)} USD)</td>
+                                        <td>{bill.address}</td>
+                                        <td>{bill.phone}</td>
+                                        <td>{bill.time}</td>
+                                        <td className="flex gap-2">
+                                            <button onClick={() => handleUpdate(bill)} className="btn btn-sm btn-warning">Update</button>
+                                            <button onClick={() => handleDelete(bill._id)} className="btn btn-sm btn-error">Delete</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            <button onClick={handleDownloadPDF} className="btn btn-success mb-6">
-                Download PDF Report
-            </button>
-
-            <div className="overflow-x-auto">
-                <table className="table table-zebra w-full">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Amount</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bills.map(bill => (
-                            <tr key={bill._id}>
-                                <td>{bill.username}</td>
-                                <td>{bill.email}</td>
-                                <td>৳{bill.amount} (${(bill.amount / 125).toFixed(2)} USD)</td>
-                                <td>{bill.address}</td>
-                                <td>{bill.phone}</td>
-                                <td>{bill.time}</td>
-                                <td className="flex gap-2">
-                                    <button onClick={() => handleUpdate(bill)} className="btn btn-sm btn-warning">Update</button>
-                                    <button onClick={() => handleDelete(bill._id)} className="btn btn-sm btn-error">Delete</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </Fade>
     );
 };
 

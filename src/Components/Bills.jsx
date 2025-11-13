@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { FaRegCircleDot } from "react-icons/fa6";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from 'react-router';
+import { Fade } from "react-awesome-reveal";
+
 
 
 const Bills = () => {
@@ -29,7 +31,7 @@ const Bills = () => {
     const filtered = bs.filter(b => !category || b.category === category);
 
     return (
-        <>
+        <Fade>
             {loading && (
                 <div className="flex justify-center items-center my-6 pt-10">
                     <span className="loading loading-spinner loading-lg text-neutral"></span>
@@ -94,7 +96,7 @@ const Bills = () => {
                         </div>
                     </div>
                 </div>
-            </div></>
+            </div></Fade>
     );
 };
 

@@ -4,6 +4,8 @@ import { AuthContext } from './Context';
 import { app, provider } from '../../public/firebase';
 import { getAuth, signInWithPopup } from 'firebase/auth';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { Fade } from "react-awesome-reveal";
+
 
 const Login = () => {
     const auth = getAuth(app);
@@ -34,7 +36,9 @@ const Login = () => {
     const handleLoginButton = async (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
+
         const password = passwordRef.current.value;
+
 
         try {
             const loggedInUser = await handleLogin(email, password);
@@ -49,7 +53,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <Fade>
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -87,7 +91,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </div>);
+        </Fade>);
 };
 
 export default Login;

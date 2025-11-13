@@ -7,6 +7,8 @@ import { app, provider } from '../../public/firebase';
 import { getAuth } from 'firebase/auth';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { Fade } from "react-awesome-reveal";
+
 
 const Register = () => {
     const auth = getAuth(app);
@@ -102,7 +104,7 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <Fade>
             <div className="hero bg-base-200 min-h-screen">
 
                 <div className="hero-content flex-col lg:flex-row-reverse">
@@ -137,7 +139,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Fade>
     );
 };
 

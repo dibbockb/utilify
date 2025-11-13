@@ -6,6 +6,7 @@ import { BsEthernet } from "react-icons/bs";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router";
+import { Fade } from "react-awesome-reveal";
 
 const Home = () => {
     const [allBids, setAllBids] = useState([]);
@@ -35,85 +36,87 @@ const Home = () => {
 
     return (
 
-        <>
-            <div className="hero-container w-full flex justify-center">
-                <div className="max-w-7xl w-full px-4 pt-5 mt-8">
-                    <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl shadow-2xl ">
-                        <div
-                            className="absolute inset-0 flex transition-transform duration-200 ease-in-out"
-                            style={{ transform: `translateX(-${current * 100}%)` }}
-                        >
-                            <div className="min-w-full bg-linear-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
-                                <div className="max-w-3xl mx-auto text-center px-6 text-white ">
-                                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Pay Electricity Bills in 30 Seconds</h1>
-                                    <p className="text-lg md:text-xl mb-6 opacity-90">DESCO — no queues. tap and pay.</p>
-                                    <br />
-                                    <button onClick={handleNavigateToBills} className="btn btn-primary btn-lg shadow-lg rounded-3xl hover:shadow-xl transform hover:-translate-y-1 transition-all">
-                                        Pay Electricity Now
-                                    </button>
+        <Fade>
+            <Fade>
+                <div className="hero-container w-full flex justify-center">
+                    <div className="max-w-7xl w-full px-4 pt-5 mt-8">
+                        <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl shadow-2xl ">
+                            <div
+                                className="absolute inset-0 flex transition-transform duration-200 ease-in-out"
+                                style={{ transform: `translateX(-${current * 100}%)` }}
+                            >
+                                <div className="min-w-full bg-linear-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                                    <div className="max-w-3xl mx-auto text-center px-6 text-white ">
+                                        <h1 className="text-4xl md:text-6xl font-bold mb-4">Pay Electricity Bills in 30 Seconds</h1>
+                                        <p className="text-lg md:text-xl mb-6 opacity-90">DESCO — no queues. tap and pay.</p>
+                                        <br />
+                                        <button onClick={handleNavigateToBills} className="btn btn-primary btn-lg shadow-lg rounded-3xl hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                            Pay Electricity Now
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="min-w-full bg-linear-to-br from-teal-600 to-cyan-700 flex items-center justify-center">
+                                    <div className="max-w-3xl mx-auto text-center px-6 text-white">
+                                        <h1 className="text-4xl md:text-6xl font-bold mb-4">Gas Bills? Done Before Your Cha Cools</h1>
+                                        <p className="text-lg md:text-xl mb-6 opacity-90">Titas, Karnaphuli — instant receipt.</p>
+                                        <br />
+
+                                        <button onClick={handleNavigateToBills} className="btn btn-accent btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                            Pay Gas Bill
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="min-w-full bg-linear-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                                    <div className="max-w-3xl mx-auto text-center px-6 text-white">
+                                        <h1 className="text-4xl md:text-6xl font-bold mb-4">WASA Water Bills — Paid While You Shower</h1>
+                                        <p className="text-lg md:text-xl mb-6 opacity-90">Dhaka, Chittagong — track usage, avoid surprises.</p>
+                                        <br />
+
+                                        <button onClick={handleNavigateToBills} className="btn btn-info btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                            Pay Water Bill
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="min-w-full bg-linear-to-br from-purple-700 to-pink-600 flex items-center justify-center">
+                                    <div className="max-w-3xl mx-auto text-center px-6 text-white">
+                                        <h1 className="text-4xl md:text-6xl font-bold mb-4">One App. All Bills. Zero Drama.</h1>
+                                        <p className="text-lg md:text-xl mb-6 opacity-90">Electricity • Gas • Water • Internet • Mobile — all in one dashboard.</p>
+                                        <br />
+
+                                        <button onClick={handleNavigateToBills} className="btn btn-success btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                            View All Bills
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="min-w-full bg-linear-to-br from-teal-600 to-cyan-700 flex items-center justify-center">
-                                <div className="max-w-3xl mx-auto text-center px-6 text-white">
-                                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Gas Bills? Done Before Your Cha Cools</h1>
-                                    <p className="text-lg md:text-xl mb-6 opacity-90">Titas, Karnaphuli — instant receipt.</p>
-                                    <br />
-
-                                    <button onClick={handleNavigateToBills} className="btn btn-accent btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
-                                        Pay Gas Bill
-                                    </button>
-                                </div>
+                            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+                                {[0, 1, 2, 3].map((i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => setCurrent(i)}
+                                        className={`w-3 h-3 rounded-full transition-all ${current === i ? 'bg-white w-10' : 'bg-white/50 hover:bg-white/80'
+                                            }`}
+                                        aria-label={`Slide ${i + 1}`}
+                                    />
+                                ))}
                             </div>
 
-                            <div className="min-w-full bg-linear-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
-                                <div className="max-w-3xl mx-auto text-center px-6 text-white">
-                                    <h1 className="text-4xl md:text-6xl font-bold mb-4">WASA Water Bills — Paid While You Shower</h1>
-                                    <p className="text-lg md:text-xl mb-6 opacity-90">Dhaka, Chittagong — track usage, avoid surprises.</p>
-                                    <br />
-
-                                    <button onClick={handleNavigateToBills} className="btn btn-info btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
-                                        Pay Water Bill
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="min-w-full bg-linear-to-br from-purple-700 to-pink-600 flex items-center justify-center">
-                                <div className="max-w-3xl mx-auto text-center px-6 text-white">
-                                    <h1 className="text-4xl md:text-6xl font-bold mb-4">One App. All Bills. Zero Drama.</h1>
-                                    <p className="text-lg md:text-xl mb-6 opacity-90">Electricity • Gas • Water • Internet • Mobile — all in one dashboard.</p>
-                                    <br />
-
-                                    <button onClick={handleNavigateToBills} className="btn btn-success btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
-                                        View All Bills
-                                    </button>
-                                </div>
-                            </div>
+                            <button
+                                onClick={() => setCurrent((c) => (c - 1 + 4) % 4)}
+                                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 text-white rounded-full backdrop-blur-sm"
+                            >❮</button>
+                            <button
+                                onClick={() => setCurrent((c) => (c + 1) % 4)}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 text-white rounded-full backdrop-blur-sm"
+                            >❯</button>
                         </div>
-
-                        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
-                            {[0, 1, 2, 3].map((i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setCurrent(i)}
-                                    className={`w-3 h-3 rounded-full transition-all ${current === i ? 'bg-white w-10' : 'bg-white/50 hover:bg-white/80'
-                                        }`}
-                                    aria-label={`Slide ${i + 1}`}
-                                />
-                            ))}
-                        </div>
-
-                        <button
-                            onClick={() => setCurrent((c) => (c - 1 + 4) % 4)}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 text-white rounded-full backdrop-blur-sm"
-                        >❮</button>
-                        <button
-                            onClick={() => setCurrent((c) => (c + 1) % 4)}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 text-white rounded-full backdrop-blur-sm"
-                        >❯</button>
                     </div>
                 </div>
-            </div>
+            </Fade>
 
 
 
@@ -203,7 +206,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </Fade>
     );
 };
 
