@@ -1,16 +1,17 @@
+// src/Components/MyBills.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './Context';
 import { DateTime } from 'luxon';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const MyBills = () => {
-    const { user } = useContext(AuthContext);
+    const { user, MySwal } = useContext(AuthContext);
     const [bills, setBills] = useState([]);
     const [loading, setLoading] = useState(true);
     const [totalAmount, setTotalAmount] = useState(0);
-    const MySwal = withReactContent(Swal);
-
 
     const fetchMyBills = async () => {
         if (!user?.email) return;
@@ -87,21 +88,40 @@ const MyBills = () => {
         }
     };
 
-    const handleDownloadReport = () => {
-        const csv = [
-            ['Username', 'Email', 'Amount (৳)', 'Amount (USD)', 'Address', 'Phone', 'Date'],
-            ...bills.map(b => [
-                b.username, b.email, b.amount, (b.amount / 125).toFixed(2), b.address, b.phone, b.time
-            ])
-        ].map(row => row.join(',')).join('\n');
+    const handleDownloadPDF = () => {
+        const doc = new jsPDF();
+        const now = DateTime.now().toFormat('yyyy-MM-dd HH:mm');
+        const totalUSD = (totalAmount / 125).toFixed(2);
+        console.log(`clicked download pdf`);
 
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `my-bills-report-${DateTime.now().toFormat('yyyy-MM-dd')}.csv`;
-        a.click();
-        URL.revokeObjectURL(url);
+
+        doc.setFontSize(18);
+        doc.text('My Paid Bills Report', 14, 20);
+        doc.setFontSize(12);
+        doc.text(`Generated: ${now}`, 14, 30);
+        doc.text(`User: ${user?.email || 'N/A'}`, 14, 37);
+        doc.text(`Total Bills: ${bills.length}`, 14, 44);
+        doc.text(`Total Amount: ৳${totalAmount.toLocaleString()} ($${totalUSD} USD)`, 14, 51);
+
+        const tableData = bills.map(b => [
+            b.username || 'N/A',
+            b.email,
+            `৳${b.amount} ($${(b.amount / 125).toFixed(2)})`,
+            b.address,
+            b.phone,
+            b.time
+        ]);
+
+        doc.autoTable({
+            head: [['Username', 'Email', 'Amount', 'Address', 'Phone', 'Date']],
+            body: tableData,
+            startY: 60,
+            theme: 'grid',
+            styles: { fontSize: 10 },
+            headStyles: { fillColor: [88, 186, 1] }
+        });
+
+        doc.save(`my-bills-report-${DateTime.now().toFormat('yyyy-MM-dd')}.pdf`);
     };
 
     if (loading) return <div className="flex justify-center pt-20"><span className="loading loading-spinner loading-lg"></span></div>;
@@ -116,7 +136,9 @@ const MyBills = () => {
                 </div>
             </div>
 
-            <button onClick={handleDownloadReport} className="btn btn-success mb-6">Download Report</button>
+            <button onClick={handleDownloadPDF} className="btn btn-success mb-6">
+                Download PDF Report
+            </button>
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
