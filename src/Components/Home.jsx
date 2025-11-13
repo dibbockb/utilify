@@ -194,7 +194,7 @@ const Home = () => {
 
                                     <button
                                         onClick={() => handleSeeDetails(allBid._id)}
-                                        className="recent-details-button w-full bg-[#58ba01] text-white rounded-4xl h-12 text-2xl mt-auto">
+                                        className="recent-details-button w-full bg-[#58ba01] text-white rounded-4xl h-12 text-2xl mt-auto hover:bg-green-600 transition ">
                                         See details
                                     </button>
                                 </div>

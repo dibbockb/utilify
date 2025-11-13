@@ -78,15 +78,6 @@ a.active{
   background-color: aliceblue;
 }
 
-.recent-details-button{
-  transition: transform 0.1s ease-in;
-}
-
-.recent-details-button:hover{
-  transform: scale(1.02);
-  filter: brightness(103%);
-}
-
 .recent-card{
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 }
