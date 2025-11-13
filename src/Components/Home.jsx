@@ -13,7 +13,7 @@ const Home = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/topbills`)
+        fetch(`https://b12a10-utility-management-server.vercel.app/topbills`)
             .then((res) => res.json())
             .then((data) => setAllBids(data))
             .catch((err) => console.log(err));

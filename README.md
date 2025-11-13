@@ -14,7 +14,7 @@ Utilify is a modern, user-friendly web application that simplifies paying utilit
 - **Protected Routes** – Private access to bill details and payment using `PrivateRoute`.
 - **Responsive Design** – Built with Tailwind CSS and DaisyUI for seamless experience on mobile (5 cm / 2 in screens) and desktop.
 - **Interactive UI** – Hero carousel, category cards, recent bills grid, and smooth animations.
-- **Real-time Data** – Fetches bills from backend at `http://localhost:3000`.
+- **Real-time Data** – Fetches bills from backend at `https://b12a10-utility-management-server.vercel.app/`.
 
 ---
 
@@ -87,7 +87,7 @@ src/
 
 The app expects a backend running at:
 ```
-http://localhost:3000
+https://b12a10-utility-management-server.vercel.app/
 ```
 
 

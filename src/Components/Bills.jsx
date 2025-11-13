@@ -13,7 +13,7 @@ const Bills = () => {
     useEffect(() => {
         const params = category ? `?category=${category}` : '';
         setLoading(true);
-        fetch(`http://localhost:3000/bills${params}`)
+        fetch(`https://b12a10-utility-management-server.vercel.app/bills${params}`)
             .then(res => res.json())
             .then(data => setAllbills(data))
             .catch(error => {

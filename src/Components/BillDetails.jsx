@@ -15,7 +15,7 @@ const BillDetails = () => {
 
     useEffect(() => {
         if (!id) return;
-        fetch(`http://localhost:3000/bills/${id}`)
+        fetch(`https://b12a10-utility-management-server.vercel.app/bills/${id}`)
             .then(res => {
                 if (!res.ok) throw new Error('Bill not found');
                 return res.json();
@@ -120,7 +120,7 @@ const BillDetails = () => {
             };
 
             try {
-                const res = await fetch('http://localhost:3000/pay-bill', {
+                const res = await fetch('https://b12a10-utility-management-server.vercel.app/pay-bill', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
