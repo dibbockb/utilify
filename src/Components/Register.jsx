@@ -42,24 +42,28 @@ const Register = () => {
             });
     }
 
-    const handleRegisterButton = (event) => {
+    const handleRegisterButton = async (event) => {
         event.preventDefault();
-        setError(``);
+        setError('');
         setLoading(true);
 
         const email = emailRef.current.value;
-        const username = usernameRef.current.value;
-        const photoURL = photoURLRef.current.value;
         const password = passwordRef.current.value;
+
         if (!email || !password) {
-            setError(`Email, Name and Password are required!`)
+            setError('Email, Name and Password are required!');
             setLoading(false);
-            console.log(error);
+            MySwal.fire({
+                icon: "error",
+                title: "Please fill in all required fields",
+                timer: 1500,
+            });
             return;
         }
 
         if (!passRegex.test(password)) {
-            setError(`Please choose a stronger password!`)
+            setError('Please choose a stronger password!');
+            setLoading(false);
             MySwal.fire({
                 icon: "error",
                 title: "Password must be at least 6 characters long and contain at least one uppercase and one lowercase letter.",
@@ -68,29 +72,34 @@ const Register = () => {
             return;
         }
 
-        handleRegister(email, password)
-            .then(result => {
-                setUser(result.user);
+        try {
+            const result = await handleRegister(email, password);
+            setUser(result);
+            setLoading(false);
+
+            MySwal.fire({
+                title: "Successful!",
+                icon: "success",
+                draggable: false,
+                timer: 1000,
+            });
+
+            setTimeout(() => {
                 navigate('/home');
-                MySwal.fire({
-                    title: "Successfull!",
-                    icon: "success",
-                    draggable: false,
-                    timer: 1000,
-                });
-            })
-            .catch(error => {
-                setError(error.message)
-                console.log(`error`, error);
-                setLoading(false)
-                MySwal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong!",
-                    timer: 1500,
-                });
-            })
-    }
+            }, 100);
+
+        } catch (error) {
+            setError(error.message);
+            console.log("error", error);
+            setLoading(false);
+            MySwal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.message || "Something went wrong!",
+                timer: 1500,
+            });
+        }
+    };
 
     return (
         <div>

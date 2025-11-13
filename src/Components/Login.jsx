@@ -23,6 +23,7 @@ const Login = () => {
                 MySwal.fire({ title: "Logged in!", icon: "success", timer: 1000 });
                 const from = location.state?.from?.pathname || '/home';
                 navigate(from, { replace: true });
+                return result.user;
             })
             .catch((err) => {
                 console.error(err);
@@ -41,6 +42,7 @@ const Login = () => {
             MySwal.fire({ title: "Logged in!", icon: "success", timer: 1000 });
             const from = location.state?.from?.pathname || '/home';
             navigate(from, { replace: true });
+            return loggedInUser;
         } catch (err) {
             MySwal.fire({ icon: "error", title: "Login failed", text: err.message, timer: 2000 });
         }

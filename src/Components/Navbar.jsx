@@ -38,7 +38,7 @@ const Navbar = () => {
                             <div className="dropdown dropdown-center">
                                 <div tabIndex={0} role="button" className="avatar cursor-pointer">
                                     <div className="w-10 h-10 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 overflow-hidden">
-                                        {user.photoURL ? (
+                                        {user?.photoURL ? (
                                             <img src={user.photoURL} alt="user avatar" className="w-full h-full object-cover" />
                                         ) : (
                                             <div className="flex items-center justify-center bg-gray-200 w-full h-full">
@@ -47,7 +47,7 @@ const Navbar = () => {
                                         )}
                                     </div>
                                 </div>
-                                <ul tabIndex={0} className="dropdown-content z-1 menu p-3 shadow bg-base-100 rounded-box w-72 text-center items-center">
+                                <ul tabIndex={0} className="dropdown-content z-1 menu p-3 shadow bg-green-100 rounded-box w-72 text-center items-center">
                                     <li><div className="font-medium">{user.email}</div></li>
                                     <li><NavLink to={'/mybills'} className="w-full">My Bills</NavLink></li>
                                     <li><button className="w-full text-left" onClick={handleLogout}>Logout</button></li>
@@ -55,8 +55,18 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <div className="flex gap-3">
-                                <NavLink to={'/login'} className={'font-medium text-[1.125rem]'}>Login</NavLink>
-                                <NavLink to={'/register'} className={'font-medium text-[1.125rem]'}>Register</NavLink>
+                                <NavLink
+                                    to={'/login'}
+                                    className=" font-medium text-[1.125rem]"
+                                >
+                                    Login
+                                </NavLink>
+                                <NavLink
+                                    to={'/register'}
+                                    className="font-medium text-[1.125rem]"
+                                >
+                                    Register
+                                </NavLink>
                             </div>
                         )}
                     </div>

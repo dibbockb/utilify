@@ -1,5 +1,5 @@
-import React, { createContext, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import React, { createContext, useEffect, useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from 'firebase/auth';
 import { app } from '../../public/firebase';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -9,14 +9,24 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const auth = getAuth(app);
+    const [loading, setLoading] = useState(true);
     const MySwal = withReactContent(Swal);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            setLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, [auth]);
 
     //reg.usingbutton
     const handleRegister = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 setUser(result.user);
-                return result;
+                return result.user;
             })
             .catch(error => {
                 console.error("Error", error);
