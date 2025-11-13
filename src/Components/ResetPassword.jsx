@@ -13,7 +13,6 @@ const ResetPassword = () => {
     const handleForgetReset = (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
-        console.log(`clicked forget reset button ++ ${email}`);
         sendPasswordResetEmail(auth, email)
             .then(() => {
                 MySwal.fire({

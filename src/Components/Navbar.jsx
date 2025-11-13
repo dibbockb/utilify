@@ -2,19 +2,30 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from "./Context";
 import { FaUserAlt } from "react-icons/fa";
-
+import { getAuth, signOut } from 'firebase/auth';
+import { app } from '../../public/firebase';
+const auth = getAuth(app);
 
 const Navbar = () => {
     const { user, setUser, MySwal } = useContext(AuthContext);
 
     const handleLogout = () => {
-        setUser(null);
-        MySwal.fire({
-            title: "Logged Out",
-            icon: "success",
-            draggable: true,
-            timer: 1000,
-        });
+        return signOut(auth)
+            .then(() => {
+                MySwal.fire({
+                    title: "Logged Out",
+                    icon: "success",
+                    timer: 1000,
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                MySwal.fire({
+                    icon: "error",
+                    title: "Logout Failed",
+                    timer: 1500,
+                });
+            });
     };
 
     return (

@@ -10,14 +10,21 @@ import { Fade } from "react-awesome-reveal";
 
 const Home = () => {
     const [allBids, setAllBids] = useState([]);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        fetch(`https://b12a10-utility-management-server.vercel.app/topbills`)
-            .then((res) => res.json())
-            .then((data) => setAllBids(data))
-            .catch((err) => console.log(err));
+        setLoading(true);
+        fetch('https://b12a10-utility-management-server.vercel.app/topbills')
+            .then(res => res.json())
+            .then(data => {
+                setAllBids(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoading(false);
+            });
     }, []);
 
     const handleSeeDetails = (id) => {
@@ -164,6 +171,11 @@ const Home = () => {
                 <div className="max-w-7xl w-full px-4">
                     <div className="recent-container flex flex-col pt-10 justify-center items-center text-center gap-5">
                         <h6 className="text-4xl font-medium">Recent Bills</h6>
+                        {loading && (
+                            <div className="flex justify-center items-center my-6 pt-10">
+                                <span className="loading loading-spinner loading-lg text-neutral"></span>
+                            </div>
+                        )}
                         <div className="recent-cards pb-10 grid grid-cols-3 gap-5 ">
                             {allBids.slice(0, 6).map((allBid) => (
                                 <div key={allBid._id ?? allBid.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px]">

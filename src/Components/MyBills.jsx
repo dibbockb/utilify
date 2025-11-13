@@ -1,12 +1,12 @@
-// src/Components/MyBills.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './Context';
 import { DateTime } from 'luxon';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
 import { Fade } from "react-awesome-reveal";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 
 const MyBills = () => {
@@ -19,6 +19,7 @@ const MyBills = () => {
         if (!user?.email) return;
         setLoading(true);
         try {
+            // const res = await fetch(`http://localhost:3000/my-bills?email=${user.email}`);
             const res = await fetch(`https://b12a10-utility-management-server.vercel.app/my-bills?email=${user.email}`);
             const data = await res.json();
             setBills(data);
@@ -46,6 +47,7 @@ const MyBills = () => {
         if (!result.isConfirmed) return;
 
         try {
+            // const res = await fetch(`http://localhost:3000/pay-bill/${id}`, { method: 'DELETE' });
             const res = await fetch(`https://b12a10-utility-management-server.vercel.app/pay-bill/${id}`, { method: 'DELETE' });
             if (!res.ok) throw new Error();
             setBills(bills.filter(b => b._id !== id));
@@ -76,6 +78,7 @@ const MyBills = () => {
 
         if (formValues) {
             try {
+                // const res = await fetch(`http://localhost:3000/pay-bill/${bill._id}`, {
                 const res = await fetch(`https://b12a10-utility-management-server.vercel.app/pay-bill/${bill._id}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
@@ -94,36 +97,34 @@ const MyBills = () => {
         const doc = new jsPDF();
         const now = DateTime.now().toFormat('yyyy-MM-dd HH:mm');
         const totalUSD = (totalAmount / 125).toFixed(2);
-        console.log(`clicked download pdf`);
-
 
         doc.setFontSize(18);
-        doc.text('My Paid Bills Report', 14, 20);
-        doc.setFontSize(12);
+        doc.text('My Bills Report', 14, 20);
+        doc.setFontSize(14);
         doc.text(`Generated: ${now}`, 14, 30);
         doc.text(`User: ${user?.email || 'N/A'}`, 14, 37);
         doc.text(`Total Bills: ${bills.length}`, 14, 44);
-        doc.text(`Total Amount: ৳${totalAmount.toLocaleString()} ($${totalUSD} USD)`, 14, 51);
+        doc.text(`Total Amount: ${totalAmount.toLocaleString()}`, 14, 51);
 
         const tableData = bills.map(b => [
             b.username || 'N/A',
             b.email,
-            `৳${b.amount} ($${(b.amount / 125).toFixed(2)})`,
+            `${b.amount}`,
             b.address,
             b.phone,
             b.time
         ]);
 
-        doc.autoTable({
+        autoTable(doc, {
             head: [['Username', 'Email', 'Amount', 'Address', 'Phone', 'Date']],
             body: tableData,
             startY: 60,
             theme: 'grid',
-            styles: { fontSize: 10 },
+            styles: { fontSize: 8 },
             headStyles: { fillColor: [88, 186, 1] }
         });
 
-        doc.save(`my-bills-report-${DateTime.now().toFormat('yyyy-MM-dd')}.pdf`);
+        doc.save(`utilify-report-${DateTime.now().toFormat('yyyy-MM-dd')}.pdf`);
     };
 
     if (loading) return <div className="flex justify-center pt-20"><span className="loading loading-spinner loading-lg"></span></div>;
@@ -136,11 +137,11 @@ const MyBills = () => {
                         <h2 className="text-4xl font-bold">My Paid Bills</h2>
                         <div className="text-right">
                             <p className="text-2xl">Total Bills Paid: <strong>{bills.length}</strong></p>
-                            <p className="text-2xl">Total Amount: <strong>৳{totalAmount.toLocaleString()} (${(totalAmount / 125).toFixed(2)} USD)</strong></p>
+                            <p className="text-2xl">Total Amount: <strong>৳{totalAmount.toLocaleString()} (${(totalAmount / 125).toFixed(2)})</strong></p>
                         </div>
                     </div>
 
-                    <button onClick={handleDownloadPDF} className="btn btn-success mb-6">
+                    <button onClick={handleDownloadPDF} className="btn btn-success border rounded-2xl mb-6 hover:bg-green-400">
                         Download PDF Report
                     </button>
 
@@ -148,7 +149,7 @@ const MyBills = () => {
                         <table className="table table-zebra w-full">
                             <thead>
                                 <tr>
-                                    <th>Username</th>
+                                    <th>Index</th>
                                     <th>Email</th>
                                     <th>Amount</th>
                                     <th>Address</th>
@@ -167,8 +168,8 @@ const MyBills = () => {
                                         <td>{bill.phone}</td>
                                         <td>{bill.time}</td>
                                         <td className="flex gap-2">
-                                            <button onClick={() => handleUpdate(bill)} className="btn btn-sm btn-warning">Update</button>
-                                            <button onClick={() => handleDelete(bill._id)} className="btn btn-sm btn-error">Delete</button>
+                                            <button onClick={() => handleUpdate(bill)} className="btn btn-sm btn-warning rounded-2xl border hover:bg-green-600">Update</button>
+                                            <button onClick={() => handleDelete(bill._id)} className="btn btn-sm btn-error rounded-2xl border hover:bg-green-600">Delete</button>
                                         </td>
                                     </tr>
                                 ))}
