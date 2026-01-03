@@ -70,20 +70,6 @@ a.active {
   @apply text-lg md:text-2xl max-w-2xl;
 }
 
-.category-card {
-  box-shadow: rgba(100, 100, 111, 0.2) 0rem 0.4375rem 1.8125rem 0rem;
-  width: 18.75rem;
-  height: 25rem;
-  border-radius: 1.5rem;
-  background-color: #ffffff81;
-  transition: transform ease-in 0.1s;
-}
-
-.category-card:hover {
-  transform: scale(1.05);
-  background-color: aliceblue;
-}
-
 .recent-card {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 }

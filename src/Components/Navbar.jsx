@@ -46,7 +46,7 @@ const Navbar = () => {
 
     return (
         <div className="dark:text-white dark:bg-black">
-            <div className="navbar-container navbar shadow-md h-15 w-full ">
+            <div className="navbar-container navbar shadow-md h-15 w-full  ">
                 <div className="flex-1 flex justify-around items-center h-15">
 
                     <Link to={'/'} className="gap-2 flex items-center justify-center">
@@ -64,14 +64,14 @@ const Navbar = () => {
                     <div className='nav-items-right flex gap-2.5 items-center'>
 
                         <div>
-                            <button onClick={toggleTheme} className="btn-primary h-10 w-10 rounded-full flex justify-center flex-col items-center hover:bg-gray-400 transition-all">
-                                <MdNightlight className="h-5 w-5"></MdNightlight>
+                            <button onClick={toggleTheme} className="btn-primary h-10 w-10 rounded-full flex justify-center flex-col items-center hover:bg-gray-400 hover:rotate-50 transition-all">
+                                <MdNightlight className="h-5 w-5 "></MdNightlight>
                             </button>
                         </div>
 
                         {user ? (
-                            <div className="dropdown dropdown-center">
-                                <div tabIndex={0} role="button" className="avatar cursor-pointer">
+                            <div className="dropdown dropdown-center dark:text-white">
+                                <div tabIndex={0} role="button" className="avatar cursor-pointer ">
                                     <div className="w-10 h-10 rounded-full ring ring-green-500 ring-offset-base-100 ring-offset-2 overflow-hidden">
                                         {user?.photoURL ? (
                                             <img src={user.photoURL} alt="user avatar" className="w-full h-full object-cover" />
@@ -82,7 +82,7 @@ const Navbar = () => {
                                         )}
                                     </div>
                                 </div>
-                                <ul tabIndex={0} className="dropdown-content z-1 menu p-3 shadow bg-green-100 rounded-box w-72 text-center items-center">
+                                <ul tabIndex={0} className="dropdown-content z-1 menu p-3 shadow bg-green-100 dark:bg-black  rounded-box w-72 text-center items-center">
                                     <li><div className="font-medium">{user.email}</div></li>
                                     <li><NavLink to={'/mybills'} className="w-full">My Bills</NavLink></li>
                                     <li><button className="w-full text-left" onClick={handleLogout}>Logout</button></li>

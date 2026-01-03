@@ -128,10 +128,11 @@ const Home = () => {
 
 
             {/* category cards */}
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center dark:text-white">
                 <div className="max-w-7xl w-full px-4">
                     <div className="category-cards pb-5 pt-10 gap-6 flex justify-center items-center ">
-                        <div className="category-card flex flex-col items-center text-center justify-center ">
+
+                        <div className="category-card shadow-2xl w-75 h-100 rounded-2xl bg-white dark:bg-black transition-all hover:scale-102 flex flex-col justify-center items-center">
                             <MdOutlineElectricBolt className="category-ico w-20 h-20"></MdOutlineElectricBolt>
                             <h4 className="text-4xl text-center pt-5">Electricity</h4>
                             <p className=" text-2xl w-55 pt-3 text-center">
@@ -139,7 +140,7 @@ const Home = () => {
                             </p>
                         </div>
 
-                        <div className="category-card flex flex-col items-center text-center justify-center ">
+                        <div className="category-card shadow-2xl w-75 h-100 rounded-2xl bg-white dark:bg-black transition-all hover:scale-102 flex flex-col justify-center items-center">
                             <FaGasPump className="category-ico w-20 h-20"></FaGasPump>
                             <h4 className="text-4xl text-center pt-5">Gas</h4>
                             <p className=" text-2xl w-50 pt-3 text-center">
@@ -147,7 +148,7 @@ const Home = () => {
                             </p>
                         </div>
 
-                        <div className="category-card flex flex-col items-center text-center justify-center ">
+                        <div className="category-card shadow-2xl w-75 h-100 rounded-2xl bg-white dark:bg-black transition-all hover:scale-102 flex flex-col justify-center items-center">
                             <FaHandHoldingWater className="category-ico w-20 h-20"></FaHandHoldingWater>
                             <h4 className="text-4xl text-center pt-5">Water</h4>
                             <p className=" text-2xl w-50 pt-3 text-center">
@@ -155,7 +156,7 @@ const Home = () => {
                             </p>
                         </div>
 
-                        <div className="category-card flex flex-col items-center text-center justify-center ">
+                        <div className="category-card shadow-2xl w-75 h-100 rounded-2xl bg-white dark:bg-black transition-all hover:scale-102 flex flex-col justify-center items-center">
                             <BsEthernet className="category-ico w-20 h-20"></BsEthernet>
                             <h4 className="text-4xl text-center pt-5">Internet</h4>
                             <p className=" text-2xl w-50 pt-3 text-center">
@@ -170,15 +171,15 @@ const Home = () => {
             <div className="w-full flex justify-center">
                 <div className="max-w-7xl w-full px-4">
                     <div className="recent-container flex flex-col pt-10 justify-center items-center text-center gap-5">
-                        <h6 className="text-4xl font-medium">Recent Bills</h6>
+                        <h6 className="text-4xl font-medium dark:text-white">Recent Bills</h6>
                         {loading && (
-                            <div className="flex justify-center items-center my-6 pt-10">
-                                <span className="loading loading-spinner loading-lg text-neutral"></span>
+                            <div className="flex justify-center items-center my-6 pt-10 dark:text-white">
+                                <span className="loading loading-spinner loading-lg text-neutral dark:text-white"></span>
                             </div>
                         )}
-                        <div className="recent-cards pb-10 grid grid-cols-3 gap-5 ">
+                        <div className="recent-cards pb-10 grid grid-cols-3 gap-5 dark:text-white">
                             {allBids.slice(0, 6).map((allBid) => (
-                                <div key={allBid._id ?? allBid.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px] bg-white hover:scale-105 transition-all overflow-hidden">
+                                <div key={allBid._id ?? allBid.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px] dark:bg-[#040101] hover:scale-105 transition-all overflow-hidden">
                                     <img
                                         className="rounded-3xl w-full h-60 "
                                         src={allBid.image}
@@ -209,7 +210,7 @@ const Home = () => {
 
                                     <button
                                         onClick={() => handleSeeDetails(allBid._id)}
-                                        className="recent-details-button w-full bg-[#58ba01] text-white rounded-4xl h-12 text-2xl mt-auto hover:bg-green-600 transition ">
+                                        className="recent-details-button w-full bg-[#58ba01] text-white rounded-4xl h-12 text-2xl mt-auto transition ">
                                         See details
                                     </button>
                                 </div>

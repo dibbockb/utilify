@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             { path: "bills", element: <Bills></Bills> },
             {
                 path: "bills/:id", element:
-                    <PrivateRoute><BillDetails></BillDetails></PrivateRoute>
+                    <BillDetails></BillDetails>
             },
             { path: "mybills", element: <MyBills></MyBills> },
             { path: "resetpassword", element: <ResetPassword></ResetPassword> },

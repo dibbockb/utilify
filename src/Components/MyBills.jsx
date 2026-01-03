@@ -127,11 +127,11 @@ const MyBills = () => {
         doc.save(`utilify-report-${DateTime.now().toFormat('yyyy-MM-dd')}.pdf`);
     };
 
-    if (loading) return <div className="flex justify-center pt-20"><span className="loading loading-spinner loading-lg"></span></div>;
+    if (loading) return <div className="flex justify-center pt-20 dark:text-white"><span className="loading loading-spinner loading-lg dark:text-white"></span></div>;
 
     return (
         <Fade>
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="min-h-screen flex items-center justify-center dark:bg-[#1A1A1A] dark:text-white">
                 <div className="my-bills-container max-w-7xl w-full p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-4xl font-bold">My Paid Bills</h2>
@@ -141,14 +141,14 @@ const MyBills = () => {
                         </div>
                     </div>
 
-                    <button onClick={handleDownloadPDF} className="btn btn-success border rounded-2xl mb-6 hover:bg-green-400">
+                    <button onClick={handleDownloadPDF} className="btn rounded-2xl mb-6 hover:bg-[#58BA01]">
                         Download PDF Report
                     </button>
 
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto dark:text-white">
                         <table className="table table-zebra w-full">
                             <thead>
-                                <tr>
+                                <tr className="dark:text-gray-500" >
                                     <th>Index</th>
                                     <th>Email</th>
                                     <th>Amount</th>
@@ -168,8 +168,8 @@ const MyBills = () => {
                                         <td>{bill.phone}</td>
                                         <td>{bill.time}</td>
                                         <td className="flex gap-2">
-                                            <button onClick={() => handleUpdate(bill)} className="btn btn-sm btn-warning rounded-2xl border hover:bg-green-600">Update</button>
-                                            <button onClick={() => handleDelete(bill._id)} className="btn btn-sm btn-error rounded-2xl border hover:bg-green-600">Delete</button>
+                                            <button onClick={() => handleUpdate(bill)} className="btn btn-sm rounded-2xl border hover:bg-green-600">Update</button>
+                                            <button onClick={() => handleDelete(bill._id)} className="btn btn-sm  rounded-2xl border hover:bg-red-600">Delete</button>
                                         </td>
                                     </tr>
                                 ))}

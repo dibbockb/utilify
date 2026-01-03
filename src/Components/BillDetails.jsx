@@ -134,7 +134,7 @@ const BillDetails = () => {
         }
     };
 
-    if (loading) return <div className="flex justify-center items-center pt-10"><span className="loading loading-spinner loading-lg text-neutral"></span></div>;
+    if (loading) return <div className="flex justify-center items-center pt-10 dark:text-white"><span className="loading loading-spinner loading-lg text-neutral dark:text-white"></span></div>;
     if (error) return <p className="text-center text-red-500 text-2xl mt-10">{error}</p>;
     if (!bill) return <p className="text-center text-2xl mt-10">No bill found.</p>;
 
@@ -142,12 +142,12 @@ const BillDetails = () => {
 
     return (
         <Fade>
-            <div className="flex justify-center pt-10 pb-10">
-                <div className="max-w-4xl mx-auto p-6 mt-10 bg-white shadow-xl rounded-3xl flex flex-col justify-center">
+            <div className="flex justify-center pt-10 pb-10 dark:text-white">
+                <div className="max-w-4xl mx-auto p-6 mt-10 bg-white shadow-xl rounded-3xl flex flex-col justify-center dark:text-white dark:bg-[#00100B]">
                     <img src={bill.image} alt={bill.title} className="w-full h-80 object-cover rounded-2xl" />
                     <div className="flex items-center pt-10 justify-between">
                         <h1 className="text-4xl font-bold">{bill.title}</h1>
-                        <p className="text-2xl text-gray-600 mt-2">{bill.date}</p>
+                        <p className="text-2xl text-gray-600 mt-2 dark:text-white">{bill.date} </p>
                     </div>
                     <div className="flex items-center pt-2 justify-between text-2xl">
                         <p><strong>Category:</strong> {bill.category}</p>
@@ -158,23 +158,13 @@ const BillDetails = () => {
                         <p className="mt-4 text-2xl"><strong>Description:</strong> {bill.description || 'No details available.'}</p>
                     </div>
 
-                    {!canPayBill && (
-                        <div className="mt-4 p-4 bg-red-100 border border-red-400 rounded-lg">
-                            <p className="text-red-700 text-lg font-semibold">
-                                ⚠️ This bill is not from the current month. Only current month bills can be paid.
-                            </p>
-                        </div>
-                    )}
+
 
                     <button
                         onClick={handlePayButton}
-                        disabled={!canPayBill}
-                        className={`mt-8 w-full py-4 rounded-2xl text-2xl font-medium transition ${canPayBill
-                            ? 'bg-[#58ba01] text-white hover:bg-green-600 cursor-pointer'
-                            : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
-                            }`}
+                        className={`mt-8 w-full py-4 rounded-2xl text-2xl font-medium transition bg-[#58ba01] text-white hover:scale-102 cursor-pointer`}
                     >
-                        {canPayBill ? 'Pay Now' : 'Cannot Pay - Not Current Month'}
+                        Pay Now
                     </button>
                 </div>
             </div>

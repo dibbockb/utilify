@@ -32,19 +32,15 @@ const Bills = () => {
 
     return (
         <Fade>
-            {loading && (
-                <div className="flex justify-center items-center my-6 pt-10">
-                    <span className="loading loading-spinner loading-lg text-neutral"></span>
-                </div>
-            )}
+
 
             <div>
-                <div className="w-full flex justify-center">
+                <div className="w-full flex justify-center dark:text-white ">
                     <div className="max-w-7xl w-full px-4">
-                        <div className="recent-container flex flex-col pt-10 justify-center items-center text-center gap-5">
-                            <h6 className="text-4xl font-medium">All Bills</h6>
+                        <div className="recent-container flex flex-col pt-10 justify-center items-center text-center gap-5 ">
+                            <h6 className="text-4xl font-medium dark:text-white ">All Bills</h6>
 
-                            <select value={category} onChange={e => setCategory(e.target.value)} className="select select-bordered text-2xl bg-gray-200 rounded-2xl">
+                            <select value={category} onChange={e => setCategory(e.target.value)} className="select select-bordered text-2xl bg-gray-200 rounded-2xl dark:bg-black">
                                 <option className="dropdown-option" value="">All</option>
                                 <option className="dropdown-option">Electricity</option>
                                 <option className="dropdown-option">Gas</option>
@@ -53,9 +49,15 @@ const Bills = () => {
                                 <option className="dropdown-option">Water</option>
                             </select>
 
+                            {loading && (
+                                <div className="flex justify-center items-center my-6 pt-10 dark:text-white">
+                                    <span className="loading loading-spinner loading-lg text-neutral dark:text-white"></span>
+                                </div>
+                            )}
+
                             <div className="recent-cards pb-10 grid grid-cols-3 gap-5 ">
                                 {filtered.map((b) => (
-                                    <div key={b._id ?? b.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px]">
+                                    <div key={b._id ?? b.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px] dark:bg-[#040101]">
                                         <img
                                             className="rounded-3xl w-full h-60"
                                             src={b.image}
