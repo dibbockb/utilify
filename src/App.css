@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light;
+  themes: light --default, light --prefersdark;
 }
 
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  font-family: "figtree", 'sans-serif';
+  font-family: "figtree", "sans-serif";
 }
 
 * {
   margin: 0;
 }
-
 
 .figtree {
   font-family: "Figtree", sans-serif;
@@ -22,25 +24,23 @@
   font-style: normal;
 }
 
-a{
-    text-decoration-thickness: 10%;
-    text-underline-offset: 8px;
-    cursor: default;
+a {
+  text-decoration-thickness: 10%;
+  text-underline-offset: 8px;
+  cursor: default;
 }
 
-a:hover{
+a:hover {
   text-decoration: underline;
-
 }
 
-a.active{
-  text-decoration : underline;
+a.active {
+  text-decoration: underline;
 }
 
 .hero-carousel {
   /* @apply carousel w-full rounded-3xl h-[31.25rem] md:h-[43.75rem] shadow-2xl overflow-hidden flex items-center justify-center;  */
 }
-
 
 .hero-slide {
   /* @apply carousel-item relative w-full h-full flex items-center justify-center; */
@@ -48,9 +48,15 @@ a.active{
   background-position: center;
 }
 
-.hero1 { background-image: url('/hero1.png'); }
-.hero2 { background-image: url('/hero2.png'); }
-.hero3 { background-image: url('/hero3.png'); }
+.hero1 {
+  background-image: url("/hero1.png");
+}
+.hero2 {
+  background-image: url("/hero2.png");
+}
+.hero3 {
+  background-image: url("/hero3.png");
+}
 
 .hero-overlay {
   @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-8 md:p-16 text-white;
@@ -64,7 +70,7 @@ a.active{
   @apply text-lg md:text-2xl max-w-2xl;
 }
 
-.category-card{
+.category-card {
   box-shadow: rgba(100, 100, 111, 0.2) 0rem 0.4375rem 1.8125rem 0rem;
   width: 18.75rem;
   height: 25rem;
@@ -73,25 +79,40 @@ a.active{
   transition: transform ease-in 0.1s;
 }
 
-.category-card:hover{
+.category-card:hover {
   transform: scale(1.05);
   background-color: aliceblue;
 }
 
-.recent-card{
+.recent-card {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 }
 
-option.dropdown-option{
+option.dropdown-option {
   transition: transform 0.1s ease-in-out;
 }
 
-option.dropdown-option:hover{
+option.dropdown-option:hover {
   transform: scale(1.05);
   background-color: #58ba01;
   border-radius: 24px;
   color: white;
 }
-.dropdown-option{
+.dropdown-option {
   transition: transform 0.1s ease-in-out;
 }
+
+/* Light theme background */
+html {
+  @apply bg-blue-400/10;
+}
+
+/* Dark theme background */
+html[data-theme="night"] {
+  @apply bg-[#1a1a1a];
+}
+
+body {
+  @apply min-h-screen;
+}
+

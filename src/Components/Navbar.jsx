@@ -1,13 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from "./Context";
 import { FaUserAlt } from "react-icons/fa";
 import { getAuth, signOut } from 'firebase/auth';
 import { app } from '../../public/firebase';
+import { MdNightlight } from "react-icons/md";
 const auth = getAuth(app);
 
 const Navbar = () => {
     const { user, setUser, MySwal } = useContext(AuthContext);
+
+    const toggleTheme = () => {
+        const htmlElement = document.documentElement;
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'night' : 'light';
+
+        htmlElement.setAttribute('data-theme', newTheme);
+        // Save preference to localStorage (optional)
+        localStorage.setItem('theme', newTheme);
+    }
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    }, []);
 
     const handleLogout = () => {
         return signOut(auth)
@@ -29,8 +45,8 @@ const Navbar = () => {
     };
 
     return (
-        <>
-            <div className="navbar-container navbar bg-base-100 shadow-sm h-15 w-full">
+        <div className="dark:text-white dark:bg-black">
+            <div className="navbar-container navbar shadow-md h-15 w-full ">
                 <div className="flex-1 flex justify-around items-center h-15">
 
                     <Link to={'/'} className="gap-2 flex items-center justify-center">
@@ -44,7 +60,15 @@ const Navbar = () => {
                         {user && <NavLink to={'/mybills'} className={'font-medium text-[1.125rem]'}>My Bills</NavLink>}
                     </div>
 
+
                     <div className='nav-items-right flex gap-2.5 items-center'>
+
+                        <div>
+                            <button onClick={toggleTheme} className="btn-primary h-10 w-10 rounded-full flex justify-center flex-col items-center hover:bg-gray-400 transition-all">
+                                <MdNightlight className="h-5 w-5"></MdNightlight>
+                            </button>
+                        </div>
+
                         {user ? (
                             <div className="dropdown dropdown-center">
                                 <div tabIndex={0} role="button" className="avatar cursor-pointer">
@@ -84,7 +108,7 @@ const Navbar = () => {
 
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -12,13 +12,16 @@ import MyBills from './Components/MyBills'
 import BillDetails from './Components/BillDetails'
 import ResetPassword from './Components/ResetPassword'
 import PrivateRoute from './Components/PrivateRoute'
+import { useEffect } from 'react'
+
+
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: (
 
-            <Layout></Layout>
+            <Layout ></Layout>
 
         ),
         children: [
@@ -36,6 +39,8 @@ const router = createBrowserRouter([
         ]
     }
 ])
+
+
 
 
 function App() {

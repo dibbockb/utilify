@@ -57,7 +57,7 @@ const Home = () => {
                                         <h1 className="text-4xl md:text-6xl font-bold mb-4">Pay Electricity Bills in 30 Seconds</h1>
                                         <p className="text-lg md:text-xl mb-6 opacity-90">DESCO — no queues. tap and pay.</p>
                                         <br />
-                                        <button onClick={handleNavigateToBills} className="btn btn-primary btn-lg shadow-lg rounded-3xl hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                        <button onClick={handleNavigateToBills} className="btn btn-lg shadow-lg rounded-3xl hover:shadow-xl transform transition-all">
                                             Pay Electricity Now
                                         </button>
                                     </div>
@@ -69,7 +69,7 @@ const Home = () => {
                                         <p className="text-lg md:text-xl mb-6 opacity-90">Titas, Karnaphuli — instant receipt.</p>
                                         <br />
 
-                                        <button onClick={handleNavigateToBills} className="btn btn-accent btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                        <button onClick={handleNavigateToBills} className="btn btn-lg rounded-3xl shadow-lg hover:shadow-xl transform transition-all">
                                             Pay Gas Bill
                                         </button>
                                     </div>
@@ -81,7 +81,7 @@ const Home = () => {
                                         <p className="text-lg md:text-xl mb-6 opacity-90">Dhaka, Chittagong — track usage, avoid surprises.</p>
                                         <br />
 
-                                        <button onClick={handleNavigateToBills} className="btn btn-info btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                        <button onClick={handleNavigateToBills} className="btn btn-lg rounded-3xl shadow-lg hover:shadow-xl transform transition-all">
                                             Pay Water Bill
                                         </button>
                                     </div>
@@ -93,7 +93,7 @@ const Home = () => {
                                         <p className="text-lg md:text-xl mb-6 opacity-90">Electricity • Gas • Water • Internet • Mobile — all in one dashboard.</p>
                                         <br />
 
-                                        <button onClick={handleNavigateToBills} className="btn btn-success btn-lg rounded-3xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                                        <button onClick={handleNavigateToBills} className="btn  btn-lg rounded-3xl shadow-lg hover:shadow-xl transform transition-all">
                                             View All Bills
                                         </button>
                                     </div>
@@ -178,9 +178,9 @@ const Home = () => {
                         )}
                         <div className="recent-cards pb-10 grid grid-cols-3 gap-5 ">
                             {allBids.slice(0, 6).map((allBid) => (
-                                <div key={allBid._id ?? allBid.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px]">
+                                <div key={allBid._id ?? allBid.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px] bg-white hover:scale-105 transition-all overflow-hidden">
                                     <img
-                                        className="rounded-3xl w-full h-60"
+                                        className="rounded-3xl w-full h-60 "
                                         src={allBid.image}
                                         alt="recent-card-img"
                                     />

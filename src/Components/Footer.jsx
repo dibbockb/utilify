@@ -32,7 +32,6 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-info font-light text-white pt-10">Copyright 2025 - Dibbo Chakraborty</div>
-
             </footer>
         </>
     );
