@@ -131,7 +131,7 @@ const MyBills = () => {
 
     return (
         <Fade>
-            <div className="min-h-screen flex items-center justify-center dark:bg-[#1A1A1A] dark:text-white">
+            <div className="min-h-screen flex items-start justify-center dark:bg-[#1A1A1A] dark:text-white">
                 <div className="my-bills-container max-w-7xl w-full p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-4xl font-bold">My Paid Bills</h2>

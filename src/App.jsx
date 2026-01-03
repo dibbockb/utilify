@@ -13,6 +13,7 @@ import BillDetails from './Components/BillDetails'
 import ResetPassword from './Components/ResetPassword'
 import PrivateRoute from './Components/PrivateRoute'
 import { useEffect } from 'react'
+import Profile from './Components/Profile'
 
 
 
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
             },
             { path: "mybills", element: <MyBills></MyBills> },
             { path: "resetpassword", element: <ResetPassword></ResetPassword> },
+            { path: "profile/:email", element: <Profile></Profile> },
         ]
     }
 ])
