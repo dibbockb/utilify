@@ -54,10 +54,11 @@ const Navbar = () => {
                         <p className="text-2xl font-bold">Utilify</p>
                     </Link>
 
-                    <div className='nav-items-middle flex gap-5'>
-                        <NavLink to={'/home'} className={'font-medium text-[1.125rem]'}>Home</NavLink>
-                        <NavLink to={'/bills'} className={'font-medium text-[1.125rem]'}>Bills</NavLink>
-                        {user && <NavLink to={'/mybills'} className={'font-medium text-[1.125rem]'}>My Bills</NavLink>}
+                    <div className='nav-items-middle flex gap-8 '>
+                        <NavLink to={'/home'} className={'font-medium text-[1.125rem] hidden'}>Home</NavLink>
+                        <NavLink to={'/bills'} className={'font-medium text-[1.125rem] hidden lg:inline'}>Bills</NavLink>
+                        {user && <NavLink to={'/mybills'} className={'font-medium  hidden lg:inline'}>My Bills</NavLink>}
+                        {user && <NavLink to={`/profile/${user.email}`} className=" hidden lg:inline">Profile</NavLink>}
                     </div>
 
 
@@ -82,7 +83,7 @@ const Navbar = () => {
                                         )}
                                     </div>
                                 </div>
-                                <ul tabIndex={0} className="dropdown-content z-1 menu p-3 shadow bg-green-100 dark:bg-black  rounded-box w-72 text-center items-center">
+                                <ul tabIndex={0} className="dropdown-content z-1 menu p-3 shadow bg-green-100 dark:bg-black  rounded-box w-25 text-center items-center lg:items-center lg:w-72">
                                     <li><NavLink to={`/profile/${user.email}`} className="w-full">Profile</NavLink></li>
                                     <li><NavLink to={'/mybills'} className="w-full">My Bills</NavLink></li>
                                     <li><button className="w-full text-left" onClick={handleLogout}>Logout</button></li>

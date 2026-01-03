@@ -12,7 +12,7 @@ const Footer = () => {
                     </div>
 
 
-                    <div className="footer-middle flex flex-col justify-center items-center text-center gap-2">
+                    <div className="footer-middle hidden  lg:flex flex-col justify-center items-center text-center gap-2  ">
                         <h4 className="font-medium text-2xl text-gray-300" href="https://www.google.com/search?client=firefox-b-d&q=similar+sites+like+utilify" target="_blank">Similar Websites</h4>
                         <a className="w-9.375rem font-light text-gray-300" href="https://www.google.com/search?client=firefox-b-d&q=megamarket" target="_blank">Megamarket</a>
                         <a className="w-9.375rem font-light text-gray-300" href="https://www.google.com/search?client=firefox-b-d&q=megaelectronics" target="_blank">Mega Electronics</a>
@@ -21,7 +21,7 @@ const Footer = () => {
                         <a className="w-9.375rem font-light text-gray-300" href="https://www.google.com/search?client=firefox-b-d&q=gaming" target="_blank">Game</a>
                     </div>
 
-                    <div className="footer-right flex flex-col justify-center items-center text-center gap-2">
+                    <div className="footer-right hidden  lg:flex  flex-col justify-center items-center text-center gap-2">
                         <h4 className="font-medium text-2xl text-gray-300" target="_blank" href="https://www.google.com/search?client=firefox-b-d&q=support">Resources</h4>
                         <a className="w-9.375rem font-light text-gray-300" href="mailto:divyajitchakraborty@gmail.com" target="_blank">Support</a>
                         <a className="w-9.375rem font-light text-gray-300" target="_blank" href="https://www.google.com/search?client=firefox-b-d&q=documentation">Documentation</a>

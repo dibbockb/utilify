@@ -45,7 +45,7 @@ const Home = () => {
 
         <Fade>
             <Fade>
-                <div className="hero-container w-full flex justify-center">
+                <div className="hero-container w-full flex justify-center ">
                     <div className="max-w-7xl w-full px-4 pt-5 mt-8">
                         <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl shadow-2xl ">
                             <div
@@ -128,11 +128,10 @@ const Home = () => {
 
 
             {/* category cards */}
-            <div className="w-full flex justify-center dark:text-white">
-                <div className="max-w-7xl w-full px-4">
-                    <div className="category-cards pb-5 pt-10 gap-6 flex justify-center items-center ">
-
-                        <div className="category-card shadow-2xl w-75 h-100 rounded-2xl bg-white dark:bg-black transition-all hover:scale-102 flex flex-col justify-center items-center">
+            <div className=" flex justify-center items-center dark:text-white pt-20 pb-10 mx-auto">
+                <div className="">
+                    <div className="grid grid-cols-1 mx-auto sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
+                        <div className="category-card shadow-2xl w-75 h-100 rounded-2xl bg-white dark:bg-black transition-all hover:scale-102 flex flex-col justify-center items-center ">
                             <MdOutlineElectricBolt className="category-ico w-20 h-20"></MdOutlineElectricBolt>
                             <h4 className="text-4xl text-center pt-5">Electricity</h4>
                             <p className=" text-2xl w-55 pt-3 text-center">
@@ -168,16 +167,16 @@ const Home = () => {
             </div>
 
             {/* //mapping allBids */}
-            <div className="w-full flex justify-center">
-                <div className="max-w-7xl w-full px-4">
-                    <div className="recent-container flex flex-col pt-10 justify-center items-center text-center gap-5">
+            <div className=" flex justify-center pb-20">
+                <div className="">
+                    <div className="recent-container flex flex-col pt-10 justify-center items-center text-center gap-5 ">
                         <h6 className="text-4xl font-medium dark:text-white">Recent Bills</h6>
                         {loading && (
                             <div className="flex justify-center items-center my-6 pt-10 dark:text-white">
                                 <span className="loading loading-spinner loading-lg text-neutral dark:text-white"></span>
                             </div>
                         )}
-                        <div className="recent-cards pb-10 grid grid-cols-3 gap-5 dark:text-white">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto px-5 dark:text-white ">
                             {allBids.slice(0, 6).map((allBid) => (
                                 <div key={allBid._id ?? allBid.id} className="recent-card flex flex-col justify-between items-center gap-3 p-3 shadow-lg rounded-3xl h-[450px] dark:bg-[#040101] hover:scale-105 transition-all overflow-hidden">
                                     <img
