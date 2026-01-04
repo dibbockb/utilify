@@ -14,6 +14,7 @@ import ResetPassword from './Components/ResetPassword'
 import PrivateRoute from './Components/PrivateRoute'
 import { useEffect } from 'react'
 import Profile from './Components/Profile'
+import Dashboard from './Components/Dashboard'
 
 
 
@@ -37,6 +38,15 @@ const router = createBrowserRouter([
             },
             { path: "mybills", element: <MyBills></MyBills> },
             { path: "resetpassword", element: <ResetPassword></ResetPassword> },
+            { path: "profile/:email", element: <Profile></Profile> },
+        ]
+    },
+    {
+        path: "/dashboard",
+        element: (<PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>),
+        children: [
+            { index: true, element: <MyBills></MyBills> },
+            { path: "mybills", element: <MyBills></MyBills> },
             { path: "profile/:email", element: <Profile></Profile> },
         ]
     }
