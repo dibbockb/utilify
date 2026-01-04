@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <>
-            <footer className="footer-container bg-black pt-10 pb-3 flex flex-col w-full text-center rounded-[3.125rem] rounded-b-none">
+        <div className="pt-25">
+            <footer className="footer-container bg-black pt-10 pb-3 flex flex-col w-full text-center rounded-[3.125rem] rounded-b-none ">
                 <div className="flex justify-evenly items-center text-center">
                     <div className="footer-left flex flex-col justify-center items-center text-center gap-2">
                         <img className="w-20" src="/logo.png" alt="" />
@@ -33,7 +33,7 @@ const Footer = () => {
 
                 <a className="footer-info font-light text-white pt-10" href="https://github.com/dibbockb" target="_blank">Copyright 2026 - Dibbo Chakraborty</a>
             </footer>
-        </>
+        </div>
     );
 };
 

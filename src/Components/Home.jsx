@@ -3,7 +3,7 @@ import { MdOutlineElectricBolt } from "react-icons/md";
 import { FaGasPump, FaRegCheckCircle } from "react-icons/fa";
 import { FaHandHoldingWater } from "react-icons/fa";
 import { BsEthernet } from "react-icons/bs";
-import { FaFileInvoiceDollar, FaRegCircleDot, FaRegCreditCard } from "react-icons/fa6";
+import { FaChevronDown, FaFileInvoiceDollar, FaRegCircleDot, FaRegCreditCard } from "react-icons/fa6";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { Fade } from "react-awesome-reveal";
@@ -32,6 +32,8 @@ const Home = () => {
     const handleSeeDetails = (id) => {
         navigate(`/bills/${id}`);
     };
+
+
 
     const [current, setCurrent] = useState(0);
     useEffect(() => {
@@ -72,6 +74,49 @@ const Home = () => {
             description: 'Instant confirmation. Download PDF receipt anytime.'
         }
     ];
+
+
+    const [openIndex, setOpenIndex] = useState(null);
+
+    const faqs = [
+        {
+            question: 'Which bills can I pay through Utilify?',
+            answer: 'Electricity (DESCO, DPDC), Gas (Titas, Jalalabad), Water (WASA), Internet (all ISPs), and Mobile recharge for all carriers.'
+        },
+        {
+            question: 'Is my payment information secure?',
+            answer: 'Absolutely. We use bank-grade encryption and never store your payment details. All transactions are processed through secure payment gateways.'
+        },
+        {
+            question: 'How long does a payment take?',
+            answer: 'Most payments complete in under 30 seconds. You get instant confirmation and receipt.'
+        },
+        {
+            question: 'Can I schedule payments for later?',
+            answer: 'Currently, only current month bills can be paid. Scheduled payments are coming soon!'
+        },
+        {
+            question: 'What if I paid the wrong amount?',
+            answer: 'You can update bill details from "My Bills" section. For refunds, contact support at divyajitchakraborty@gmail.com.'
+        },
+        {
+            question: 'Do you charge any extra fees?',
+            answer: 'No hidden charges. You pay exactly what the bill amount is — nothing more.'
+        },
+        {
+            question: 'Can I download payment receipts?',
+            answer: 'Yes! Go to "My Bills" and click "Download PDF Report" to get all your transaction history.'
+        },
+        {
+            question: 'Is there a mobile app?',
+            answer: 'The website is fully responsive and works perfectly on mobile. A dedicated app is in development.'
+        }
+    ];
+
+    const toggle = (idx) => {
+        setOpenIndex(openIndex === idx ? null : idx);
+    };
+
     return (
 
         <Fade>
@@ -155,7 +200,6 @@ const Home = () => {
                     </div>
                 </div>
             </Fade>
-
 
             {/* category cards */}
             <Fade>
@@ -313,6 +357,136 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                </div>
+            </Fade>
+
+            <Fade>
+                <div className="w-full flex justify-center py-1  dark:bg-[#1a1a1a]">
+                    <div className="max-w-4xl w-full px-4 pb-10">
+                        <h2 className="text-4xl font-bold text-center mb-4 dark:text-white pb-5">
+                            Frequently Asked Questions
+                        </h2>
+                        <p className="text-2xl text-center text-gray-600 dark:text-gray-400 mb-16 pb-5">
+                            Got questions? We've got answers.
+                        </p>
+
+                        <div className="flex flex-col gap-2 pb-10">
+                            {faqs.map((faq, id) => (
+                                <div
+                                    key={id}
+                                    className="bg-white  dark:bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-lg "
+                                >
+                                    <button
+                                        onClick={() => toggle(id)}
+                                        className="w-full flex justify-between items-center p-6 text-left hover:bg-white/50 dark:hover:bg-black/50 transition "
+                                    >
+                                        <h3 className="text-2xl font-semibold dark:text-white pr-4">
+                                            {faq.question}
+                                        </h3>
+                                        <FaChevronDown
+                                            className={`text-[#58ba01] text-2xl transition-transform flex-0 ${openIndex === id ? 'rotate-180' : ''
+                                                }`}
+                                        />
+                                    </button>
+
+                                    <div
+                                        className={`overflow-hidden transition-all duration-300 ${openIndex === id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                                            }`}
+                                    >
+                                        <p className="px-6 pb-6 text-xl text-gray-700 dark:text-gray-300">
+                                            {faq.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-16 text-center bg-[#58ba01] text-white rounded-3xl p-8">
+                            <h3 className="text-3xl font-bold mb-4">
+                                Still have questions?
+                            </h3>
+                            <p className="text-xl mb-6">
+                                We're here to help 24/7
+                            </p>
+                            <a
+                                href="mailto:divyajitchakraborty@gmail.com"
+                                className="inline-block bg-white text-[#58ba01] px-8 py-4 rounded-2xl text-xl font-semibold hover:bg-gray-100 transition"
+                            >
+                                Contact Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </Fade>
+
+            <Fade>
+                <div className="w-full flex justify-center py-20 bg-[#58BA01] rounded-4xl">
+                    <div className="max-w-7xl w-full px-4">
+                        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-12 text-center shadow-2xl flex flex-col justify-center items-center gap-10 ">
+                            <h2 className="text-6xl font-bold text-white mb-6">
+                                Stop Wasting Time in Lines!
+                            </h2>
+
+                            <p className="text-2xl text-white/90 mb-8 max-w-3xl mx-auto flex flex-col text-center ">
+                                Join 5,000+ users who pay their bills in under 30 seconds.
+                                <p>No queues. No paperwork. No headaches.</p>
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                                <div className="flex items-center gap-3">
+                                    <div className="bg-white p-4 rounded-full">
+                                        <span className="text-4xl">⚡</span>
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="text-white font-bold text-xl">Instant</p>
+                                        <p className="text-white/80">Under 30s</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <div className="bg-white p-4 rounded-full">
+                                        <span className="text-4xl">🔒</span>
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="text-white font-bold text-xl">Secure</p>
+                                        <p className="text-white/80">Bank-grade</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <div className="bg-white p-4 rounded-full">
+                                        <span className="text-4xl">📱</span>
+                                    </div>
+                                    <div className="text-left">
+                                        <p className="text-white font-bold text-xl">Simple</p>
+                                        <p className="text-white/80">3 clicks</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <button
+                                    onClick={() => navigate('/register')}
+                                    className="bg-white text-[#58ba01] px-12 py-5 rounded-2xl text-2xl font-bold hover:bg-gray-100 hover:scale-105 transition-all shadow-lg"
+                                >
+                                    Get Started Free
+                                </button>
+
+                                <button
+                                    onClick={() => navigate('/bills')}
+                                    className="bg-transparent border-2 border-white text-white px-12 py-5 rounded-2xl text-2xl font-bold hover:bg-white/10 hover:scale-105 transition-all"
+                                >
+                                    View All Bills
+                                </button>
+                            </div>
+
+                            <p className="text-white mt-8 text-lg">
+                                No credit card required • Authority Apporved
+                            </p>
+                        </div>
+
+                        
                     </div>
                 </div>
             </Fade>
