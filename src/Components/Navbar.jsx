@@ -54,11 +54,11 @@ const Navbar = () => {
                         <p className="text-2xl font-bold">Utilify</p>
                     </Link>
 
-                    <div className='nav-items-middle flex gap-5 pl-19 justify-center items-center '>
+                    <div className='nav-items-middle flex gap-5 justify-center items-center '>
                         <NavLink to={'/home'} className={'font-medium text-[1.125rem]'}>Home</NavLink>
                         <NavLink to={'/bills'} className={'font-medium text-[1.125rem] hidden lg:inline'}>Bills</NavLink>
                         <NavLink to={'/dashboard'} className={'font-medium  hidden lg:inline'}>Dashboard</NavLink>
-                        {user && <NavLink to={'/mybills'} className={'font-medium'}>My Bills</NavLink>}
+                        {user && <NavLink to={'/mybills'} className={'font-medium hidden lg:inline'}>My Bills</NavLink>}
                     </div>
 
 

@@ -10,8 +10,8 @@ const Dashboard = () => {
     const { user } = useContext(AuthContext)
     return (
         <Fade>
-            <div className="min-h-screen bg-[#1a1a1a] flex dark:text-white">
-                <aside className="w-85 bg-[#0f0f0f] p-6 pl-20 flex flex-col ">
+            <div className="min-h-screen bg-white dark:bg-[#1a1a1a] flex dark:text-white">
+                <aside className=" min-h-screen w-85 bg-[#0f0f0f] p-6 pl-20 flex flex-col ">
                     <Link to={"/"} className="flex justify-center w-45 hover:scale-105 translate-all pb-5"><img src="/logo.png" alt="utilify-logo" className="h-15 w-15" /></Link>
 
                     <div className="flex flex-col justify-center items-start text-center">
@@ -34,6 +34,7 @@ const Dashboard = () => {
                             Profile
                         </Link>
                     </div>
+
 
                 </aside>
 
