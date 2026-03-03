@@ -1,6 +1,6 @@
 # Utilify - Utility Bill Management System
 
-**Live Site:** [https://b12a10-utility-management.web.app/home](https://b12a10-utility-management.web.app/home)
+**Live Site:** [https://b12a10-utility-management.web.app/home](https://utilify.dibbockb.com)
 
 Utilify is a modern, user-friendly web application that simplifies paying utility bills — electricity, gas, water, internet, and mobile — all in one place. No queues, no hassle, just tap and pay.
 
